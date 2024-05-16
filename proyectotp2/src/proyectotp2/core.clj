@@ -1,4 +1,4 @@
-(ns tp2.core)
+(ns proyectotp2.core)
 
 (defn foo
   "I don't do a whole lot."
