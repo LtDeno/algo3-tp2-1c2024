@@ -1,4 +1,5 @@
 (ns proyectotp2.main)
+(require '[clojure.string :as str])
 
 (defn -main [read_file num_iterations write_file]
   (println read_file num_iterations write_file "Main.")
