@@ -13,7 +13,6 @@
     (funcion-recursiva pila-tortugas sistema-l ruta-svg (dec i))))
 
 (defn -main [read_file num_iterations write_file]
-  (println read_file num_iterations write_file "Main.")
   (spit write_file "<svg viewBox=\"-50 -150 300 200\" xmlns=\"http://www.w3.org/2000/svg\">")
   (let [pila (Pila. [(Tortuga. (vector 0.0 0.0) 0.0 true)])
     sistema-l-especificaciones (str/split (slurp read_file) #"\n")
@@ -24,6 +23,8 @@
     (funcion-recursiva num_iterations pila sistema-l write_file)))
 
 (defn escribir-svg
+  "Recibe el nombre de un archivo al cual agregar una linea en SVG.
+   Recibe un mapping [] o {} con las coordenadas XY del punto incial y el punto final."
   [archivo punto-a punto-b]
   (spit archivo (format "<line x1=\"%.1f\" y1=\"%.1f\" x2=\"%.1f\" y2=\"%.1f\" stroke-width=\"1\" stroke=\"black\" />" (get punto-a 0) (get punto-a 1) (get punto-b 0) (get punto-b 1)) :append true))
 
