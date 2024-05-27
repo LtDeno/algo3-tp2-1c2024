@@ -1,6 +1,9 @@
-(ns proyectotp2.main)
-(require '[clojure.string :as str])
-(require '[clojure.math :as math])
+(ns proyectotp2.main
+  (:require
+    [clojure.string :as str]
+    [clojure.math :as math]
+    [proyectotp2.sistemal :as sisl]
+    ))
 (java.util.Locale/setDefault java.util.Locale/US)
 
 (defn funcion-recursiva
