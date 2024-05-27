@@ -1,7 +1,11 @@
-(ns proyectotp2.main)
-(require '[clojure.string :as str])
+(ns proyectotp2.main
+  (:require
+    [clojure.string :as str]
+    [proyectotp2.sistemal :as sisl]
+    ))
 
 (defn -main [read_file num_iterations write_file]
+  (transformar-axioma)
   (println read_file num_iterations write_file "Main.")
   (def pila (Pila. [(Tortuga. (vector 0 0) 0 true)]))
   (def sistema-l-especificaciones (str/split (slurp read_file) #"\n"))
