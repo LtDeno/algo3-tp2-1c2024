@@ -1,47 +1,15 @@
 (ns proyectotp2.main
   (:require
-    [clojure.string :as str]
-    [clojure.math :as math]
     [proyectotp2.sistemal :as sisl]
-    ))
+    [proyectotp2.filemanager :as fman]))
+
 (java.util.Locale/setDefault java.util.Locale/US)
 
-(defn funcion-recursiva
-  [i pila-tortugas sistema-l ruta-svg]
-  (if (zero? i)
-    (spit ruta-svg "</svg>" :append true)
-    (funcion-recursiva pila-tortugas sistema-l ruta-svg (dec i))))
-
 (defn -main [read_file num_iterations write_file]
-  (spit write_file "<svg viewBox=\"-50 -150 300 200\" xmlns=\"http://www.w3.org/2000/svg\">")
-  (let [pila (Pila. [])
-    sistema-l-especificaciones (str/split (slurp read_file) #"\n")
-    angulo-giro (first sistema-l-especificaciones)
-    axioma (first (rest sistema-l-especificaciones))
-    pares-predecesor-sucesor (apply merge (map #(hash-map (keyword (first %1)) (get (vec (rest %1)) 0)) (vec (map #(str/split % #" ") (rest (rest sistema-l-especificaciones))))))
-    sistema-l (Sistema-L. axioma angulo-giro pares-predecesor-sucesor)]
-    (funcion-recursiva num_iterations pila sistema-l write_file)))
+  (let [read_vect (fman/obtener-archivo read_file)
+        cmd_seq (sisl/transformar-axioma (fman/obtener-axioma read_vect) (fman/obtener-reglas read_vect) (Integer/parseInt num_iterations))
+        turn_angle (fman/obtener-angulo read_vect)]
 
-(defn escribir-svg
-  "Recibe el nombre de un archivo al cual agregar una linea en SVG.
-   Recibe un mapping [] o {} con las coordenadas XY del punto incial y el punto final."
-  [archivo punto-a punto-b]
-  (spit archivo (format "<line x1=\"%.1f\" y1=\"%.1f\" x2=\"%.1f\" y2=\"%.1f\" stroke-width=\"1\" stroke=\"black\" />" (get punto-a 0) (get punto-a 1) (get punto-b 0) (get punto-b 1)) :append true))
-
-(defprotocol PilaAcciones
-  (apilar [pila elemento])
-  (desapilar [pila])
-  (ver-tope [pila]))
-
-(defrecord Pila [elementos]
-  PilaAcciones
-  (apilar [pila elemento] ())
-  (desapilar [pila] ())
-  (ver-tope [pila] ()))
-
-(defprotocol Sistema-LAcciones
-  (suceder [sistema-l]))
-
-(defrecord Sistema-L [axioma angulo-giro pares-predecesor-sucesor]
-  Sistema-LAcciones
-  (suceder [sistema-l] ()))
+    (fman/escribir-primer-linea write_file)
+    (sisl/procesar cmd_seq (Integer/parseInt turn_angle) write_file)
+    (fman/escribir-ultima-linea write_file)))
