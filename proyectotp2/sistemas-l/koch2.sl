@@ -1,3 +1,0 @@
-90
-F+F+F+F
-F F+F-F-FFF+F+F-F
