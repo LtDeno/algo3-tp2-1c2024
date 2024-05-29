@@ -47,6 +47,7 @@
       (apilar-tortuga (tort/duplicar (last tort_pile)) tort_pile)
     (and (= cmd (first "]")) (not-empty tort_pile))
       (desapilar-tortuga tort_pile)
+    :else tort_pile
     )
   )
 
