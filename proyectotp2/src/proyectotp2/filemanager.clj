@@ -53,8 +53,8 @@
   [vect_1 vect_2]
   (vector (min (get vect_1 0) (get vect_2 0) (get vect_2 2))
           (min (get vect_1 1) (get vect_2 1) (get vect_2 3))
-          (max (get vect_1 0) (get vect_2 0) (get vect_2 2))
-          (max (get vect_1 1) (get vect_2 1) (get vect_2 3))))
+          (max (get vect_1 2) (abs (get vect_2 0)) (abs (get vect_2 2)))
+          (max (get vect_1 3) (abs (get vect_2 1)) (abs (get vect_2 3)))))
 
 (defn obtener-valores-viewbox
   "Devuelve un vector ordenado segun x_min y_min ancho alto, cuyos valores son obtenidos del array de elementos linea pasados."
@@ -70,8 +70,8 @@
         vect_elementos_linea (rest vect_archivo)
         vect_margenes_viewbox (obtener-valores-viewbox vect_elementos_linea)]
     (escribir-primer-linea write_file
-                           (- (get vect_margenes_viewbox 0) 50.0)
-                           (- (get vect_margenes_viewbox 1) 50.0)
-                           (+ (get vect_margenes_viewbox 2) 100.0)
-                           (+ (get vect_margenes_viewbox 3) 100.0))
+                           (- (get vect_margenes_viewbox 0) 50)
+                           (- (get vect_margenes_viewbox 1) 50)
+                           (+ (get vect_margenes_viewbox 2) (abs (get vect_margenes_viewbox 0)) 100)
+                           (+ (get vect_margenes_viewbox 3) (abs (get vect_margenes_viewbox 0)) 100))
     (spit write_file (str/join "\n" vect_elementos_linea) :append true)))
