@@ -34,15 +34,15 @@
 (defn ejecutar-comando [cmd tort_pile turn_angle write_file]
   (cond
     (and (or (= cmd (first "F")) (= cmd (first "G"))) (not-empty tort_pile))
-      (cambiar-tortuga-tope (tort/avanzar (last tort_pile) 1 write_file) tort_pile)
+      (cambiar-tortuga-tope (tort/avanzar (last tort_pile) 1.0 write_file) tort_pile)
     (and (or (= cmd (first "f")) (= cmd (first "g"))) (not-empty tort_pile))
-      (cambiar-tortuga-tope (tort/avanzar-sin-escribir (last tort_pile) 1 write_file) tort_pile)
+      (cambiar-tortuga-tope (tort/avanzar-sin-escribir (last tort_pile) 1.0 write_file) tort_pile)
     (and (= cmd (first "+")) (not-empty tort_pile))
       (cambiar-tortuga-tope (tort/derecha (last tort_pile) turn_angle) tort_pile)
     (and (= cmd (first "-")) (not-empty tort_pile))
       (cambiar-tortuga-tope (tort/izquierda (last tort_pile) turn_angle) tort_pile)
     (and (= cmd (first "|")) (not-empty tort_pile))
-      (cambiar-tortuga-tope (tort/derecha (last tort_pile) 180) tort_pile)
+      (cambiar-tortuga-tope (tort/derecha (last tort_pile) 180.0) tort_pile)
     (= cmd (first "["))
       (apilar-tortuga (tort/duplicar (last tort_pile)) tort_pile)
     (and (= cmd (first "]")) (not-empty tort_pile))

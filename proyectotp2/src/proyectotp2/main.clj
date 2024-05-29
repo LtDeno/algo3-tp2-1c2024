@@ -11,5 +11,5 @@
         turn_angle (fman/obtener-angulo read_vect)]
 
     (fman/escribir-primer-linea write_file)
-    (sisl/procesar cmd_seq (Integer/parseInt turn_angle) write_file)
+    (sisl/procesar cmd_seq (Float/parseFloat turn_angle) write_file)
     (fman/escribir-ultima-linea write_file)))
