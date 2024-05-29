@@ -26,7 +26,7 @@
   "Escribe la primera linea para un archivo SVG en el archivo especificado.
   Sobreescribe el archivo."
   [write_file]
-  (spit write_file "<svg viewBox=\"-9000 -9000 20000 20000\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">"))
+  (spit write_file "<svg viewBox=\"-900 -900 1500 1500\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">"))
 
 (defn escribir-comienzo-path
   "Escribe el comienzo para el elemento Path de SVG en el archivo especificado.
@@ -51,12 +51,6 @@
   No sobreescribe el archivo."
   [write_file]
   (spit write_file "\" stroke-width=\"1\" stroke=\"black\" fill=\"none\"/>" :append true))
-
-(defn escribir-linea-vector
-  "Escribe una linea (tal que dos vectores posicion) en formato SVG en el archivo especificado.
-  No sobreescribe el archivo."
-  [write_file start_pos end_pos]
-  (spit write_file (format "\n<line x1=\"%.1f\" y1=\"%.1f\" x2=\"%.1f\" y2=\"%.1f\" stroke-width=\"1\" stroke=\"black\" />" (get start_pos 0) (get start_pos 1) (get end_pos 0) (get end_pos 1)) :append true))
 
 (defn escribir-ultima-linea
   "Escribe la ultima linea para un archivo SVG en el archivo especificado.
