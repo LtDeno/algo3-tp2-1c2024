@@ -28,6 +28,30 @@
   [write_file]
   (spit write_file "<svg viewBox=\"-9000 -9000 20000 20000\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">"))
 
+(defn escribir-comienzo-path
+  "Escribe el comienzo para el elemento Path de SVG en el archivo especificado.
+  No sobreescribe el archivo."
+  [write_file]
+  (spit write_file "\n<path d=\"M 0.00 0.00" :append true))
+
+(defn escribir-path-M
+  "Escribe las coordenadas para moverse a una coordenada en Path de SVG en el archivo especificado.
+  No sobreescribe el archivo."
+  [write_file end_pos]
+  (spit write_file (format " M %.2f %.2f" (get end_pos 0) (get end_pos 1)) :append true))
+
+(defn escribir-path-L
+  "Escribe las coordenadas para moverse a una coordenada en Path de SVG en el archivo especificado.
+  No sobreescribe el archivo."
+  [write_file end_pos]
+  (spit write_file (format " L %.2f %.2f" (get end_pos 0) (get end_pos 1)) :append true))
+
+(defn escribit-fin-path
+  "Escribe el final para el elemento Path de SVG en el archivo especificado.
+  No sobreescribe el archivo."
+  [write_file]
+  (spit write_file "\" stroke-width=\"1\" stroke=\"black\" fill=\"none\"/>" :append true))
+
 (defn escribir-linea-vector
   "Escribe una linea (tal que dos vectores posicion) en formato SVG en el archivo especificado.
   No sobreescribe el archivo."
