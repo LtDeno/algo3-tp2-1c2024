@@ -32,7 +32,6 @@
   (pop tort_pile))
 
 (defn ejecutar-comando [cmd tort_pile turn_angle write_file]
-  (println tort_pile)
   (cond
     (and (or (= cmd (first "F")) (= cmd (first "G"))) (not-empty tort_pile))
       (cambiar-tortuga-tope (tort/avanzar (last tort_pile) 5.0 write_file) tort_pile)
