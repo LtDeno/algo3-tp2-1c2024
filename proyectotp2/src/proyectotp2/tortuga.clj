@@ -32,14 +32,11 @@
         new-position (vector (+ (get (:posicion tortuga) 0) (* (get direction 0) cantidad)) (+ (get (:posicion tortuga) 1) (* (get direction 1) cantidad)))]
     (if (:pluma-arriba? tortuga)
       nil
-      (fman/escribir-path-L archivo new-position))
+      (fman/escribir-linea-vector archivo (:posicion tortuga) new-position))
     (Tortuga. new-position (:angulo tortuga) (:pluma-arriba? tortuga))))
 
 (defn avanzar-sin-escribir
   [tortuga cantidad archivo]
-  (let [direction (vector (math/cos (math/to-radians (:angulo tortuga))) (math/sin (math/to-radians (:angulo tortuga))))
-        new-position (vector (+ (get (:posicion tortuga) 0) (* (get direction 0) cantidad)) (+ (get (:posicion tortuga) 1) (* (get direction 1) cantidad)))]
-    (if (:pluma-arriba? tortuga)
-      nil
-      (fman/escribir-path-M archivo new-position))
-    (Tortuga. new-position (:angulo tortuga) (:pluma-arriba? tortuga))))
+  (pluma-arriba tortuga)
+  (avanzar tortuga cantidad archivo)
+  (pluma-abajo tortuga))

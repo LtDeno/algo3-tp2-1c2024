@@ -28,29 +28,11 @@
   [write_file]
   (spit write_file "<svg viewBox=\"-900 -900 1500 1500\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">"))
 
-(defn escribir-comienzo-path
-  "Escribe el comienzo para el elemento Path de SVG en el archivo especificado.
+(defn escribir-linea-vector
+  "Escribe una linea (tal que dos vectores posicion) en formato SVG en el archivo especificado.
   No sobreescribe el archivo."
-  [write_file]
-  (spit write_file "\n<path d=\"M 0.00 0.00" :append true))
-
-(defn escribir-path-M
-  "Escribe las coordenadas para moverse a una coordenada en Path de SVG en el archivo especificado.
-  No sobreescribe el archivo."
-  [write_file end_pos]
-  (spit write_file (format " M %.2f %.2f" (get end_pos 0) (get end_pos 1)) :append true))
-
-(defn escribir-path-L
-  "Escribe las coordenadas para moverse a una coordenada en Path de SVG en el archivo especificado.
-  No sobreescribe el archivo."
-  [write_file end_pos]
-  (spit write_file (format " L %.2f %.2f" (get end_pos 0) (get end_pos 1)) :append true))
-
-(defn escribit-fin-path
-  "Escribe el final para el elemento Path de SVG en el archivo especificado.
-  No sobreescribe el archivo."
-  [write_file]
-  (spit write_file "\" stroke-width=\"1\" stroke=\"black\" fill=\"none\"/>" :append true))
+  [write_file start_pos end_pos]
+  (spit write_file (format "\n<line x1=\"%.1f\" y1=\"%.1f\" x2=\"%.1f\" y2=\"%.1f\" stroke-width=\"1\" stroke=\"black\" />" (get start_pos 0) (get start_pos 1) (get end_pos 0) (get end_pos 1)) :append true))
 
 (defn escribir-ultima-linea
   "Escribe la ultima linea para un archivo SVG en el archivo especificado.
