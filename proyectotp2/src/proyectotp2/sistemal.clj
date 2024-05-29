@@ -32,6 +32,7 @@
   (pop tort_pile))
 
 (defn ejecutar-comando [cmd tort_pile turn_angle write_file]
+  (println tort_pile)
   (cond
     (and (or (= cmd (first "F")) (= cmd (first "G"))) (not-empty tort_pile))
       (cambiar-tortuga-tope (tort/avanzar (last tort_pile) 1.0 write_file) tort_pile)
@@ -51,4 +52,4 @@
   )
 
 (defn procesar [cmd_seq turn_angle write_file]
-  (reduce #(ejecutar-comando %2 %1 turn_angle write_file) (vector (tort/->Tortuga (vector 0.0 0.0) 0.0 true)) cmd_seq))
+  (reduce #(ejecutar-comando %2 %1 turn_angle write_file) (vector (tort/->Tortuga (vector 0.0 0.0) 0.0 false)) cmd_seq))
