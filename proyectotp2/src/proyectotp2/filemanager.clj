@@ -40,6 +40,10 @@
   [write_file]
   (spit write_file "\n</svg>" :append true))
 
+(defn escribir-svg
+  [archivo punto-a punto-b]
+  (spit archivo (format "<line x1=\"%.1f\" y1=\"%.1f\" x2=\"%.1f\" y2=\"%.1f\" stroke-width=\"1\" stroke=\"black\" />" (get punto-a 0) (get punto-a 1) (get punto-b 0) (get punto-b 1)) :append true))
+
 (defn conseguir-floats
   "Devuelve un vector de floats obtenidos de leer el String como si fuese un elemento linea de SVG."
   [string]

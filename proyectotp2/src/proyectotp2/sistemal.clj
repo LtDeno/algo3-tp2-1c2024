@@ -52,4 +52,4 @@
   )
 
 (defn procesar [cmd_seq turn_angle write_file]
-  (reduce #(ejecutar-comando %2 %1 turn_angle write_file) (vector (tort/->Tortuga (vector 0.0 0.0) 0.0 false)) cmd_seq))
+  (reduce #(ejecutar-comando %2 %1 turn_angle write_file) (vector (tort/->Tortuga (vector 0.0 0.0) -90.0 false)) cmd_seq))
