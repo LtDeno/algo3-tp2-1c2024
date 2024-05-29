@@ -26,7 +26,7 @@
   "Escribe la primera linea para un archivo SVG en el archivo especificado.
   Sobreescribe el archivo."
   [write_file]
-  (spit write_file "<svg viewBox=\"-50 -150 300 200\" xmlns=\"http://www.w3.org/2000/svg\">"))
+  (spit write_file "<svg viewBox=\"-9000 -9000 20000 20000\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">"))
 
 (defn escribir-linea-vector
   "Escribe una linea (tal que dos vectores posicion) en formato SVG en el archivo especificado.
