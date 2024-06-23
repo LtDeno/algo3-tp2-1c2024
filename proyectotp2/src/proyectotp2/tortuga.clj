@@ -37,6 +37,4 @@
 
 (defn avanzar-sin-escribir
   [tortuga cantidad archivo]
-  (pluma-arriba tortuga)
-  (avanzar tortuga cantidad archivo)
-  (pluma-abajo tortuga))
+  (pluma-abajo (avanzar (pluma-arriba tortuga) cantidad archivo)))

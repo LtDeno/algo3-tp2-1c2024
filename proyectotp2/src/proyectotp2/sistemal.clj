@@ -3,24 +3,24 @@
     [clojure.string :as str]
     [proyectotp2.tortuga :as tort]))
 
-(defn get-string-if-char-at-first-pos [char string]
-  (if (= 0 (compare (first char) (first string))) (reduced string) char))
+(defn obtener-reemplazo
+  "Recibe Map de reglas segun filemanager y un Character para key.
+  Devuelve un String."
+  [reglas char]
+  (let [reemplazo (get reglas char)]
+    (if (nil? reemplazo) (String/valueOf char) reemplazo)))
 
-(defn get-corresponding-rule [char rules]
-  (str/trim (str/replace-first (reduce get-string-if-char-at-first-pos char rules) char " ")))
-
-(defn change-recurrences-by-rules [to_change rules _unused]
-  (reduce #(if (str/blank? (get-corresponding-rule (str %2) rules))
-       (str/join (concat %1 (str %2)))
-       (str/join (concat %1 (get-corresponding-rule (str %2) rules)))) "" (seq to_change)))
+(defn cambiar-ocurrencias-segun-reglas
+  "Recibe un String a modificar, Map de reglas segun filemanager.
+  Devuelve un String."
+  [string reglas _unused]
+  (reduce #(str/join (concat %1 (obtener-reemplazo reglas %2))) "" (seq string)))
 
 (defn transformar-axioma
-  "Axioma es un String.
-  Reglas es un vector de Strings.
-  Iteraciones es un Number.
-  Devuelve un vector de caracteres para usar como acciones."
-  [axiom rules num_iterations]
-  (vec (seq (reduce #(change-recurrences-by-rules %1 rules %2) axiom (range num_iterations)))))
+  "Recibe un axioma como String, un Map de reglas segun filemanager, y un Integer de cantidad de iteracione.
+  Devuelve un Vector."
+  [axioma reglas num_iteraciones]
+  (vec (seq (reduce #(cambiar-ocurrencias-segun-reglas %1 reglas %2) axioma (range num_iteraciones)))))
 
 (defn cambiar-tortuga-tope [tortuga tort_pile]
   (assoc tort_pile (- (count tort_pile) 1) tortuga))

@@ -7,9 +7,8 @@
 
 (defn -main [read_file num_iterations write_file]
   (let [read_vect (fman/obtener-archivo read_file)
-        cmd_seq (sisl/transformar-axioma (fman/obtener-axioma read_vect) (fman/obtener-reglas read_vect) (Integer/parseInt num_iterations))
+        cmd_seq (sisl/transformar-axioma (fman/obtener-axioma read_vect) (fman/obtener-reglas read_vect) (- (Integer/parseInt num_iterations) 1))
         turn_angle (fman/obtener-angulo read_vect)]
-
     (fman/escribir-primer-linea write_file -50.0 -50.0 100.0 100.0)
     (sisl/procesar cmd_seq (Float/parseFloat turn_angle) write_file)
     (fman/ajustar-viewbox write_file)

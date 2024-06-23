@@ -17,10 +17,13 @@
   [read_vect]
   (get read_vect 1))
 
+(defn mapear-reglas [reglas]
+  (apply merge (map #(hash-map (first %) (str/join (next (next %)))) reglas)))
+
 (defn obtener-reglas
-  "Devuelve el axioma como String. El tercero a ultimo String del vector obtenido del archivo de lectura."
+  "Devuelve un Map con las reglas, cuyas keys son Character y values son String."
   [read_vect]
-  (next (next read_vect)))
+  (mapear-reglas (next (next read_vect))))
 
 (defn escribir-primer-linea
   "Escribe la primera linea para un archivo SVG en el archivo especificado.
